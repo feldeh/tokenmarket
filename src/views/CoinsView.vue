@@ -1,5 +1,7 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import MarketTable from '@/components/MarketTable.vue'
+</script>
 
 <template>
-  <main></main>
+  <main><MarketTable /></main>
 </template>
