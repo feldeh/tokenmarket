@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
   <nav>
     <RouterLink to="/">Coins</RouterLink>
@@ -7,6 +5,8 @@
   </nav>
   <RouterView />
 </template>
+
+<script setup lang="ts"></script>
 
 <style scoped>
 nav {

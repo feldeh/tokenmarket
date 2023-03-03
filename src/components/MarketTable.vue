@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
   <div class="table">
     <table cellspacing="0" cellpadding="0">
@@ -15,9 +13,14 @@
       </thead>
       <tbody>
         <tr>
-          <td class="left-aligned" colspan="2">Bitcoin</td>
-          <td class="right-aligned">$23,160.32</td>
-          <td class="right-aligned">-1.63%</td>
+          <td class="left-aligned" colspan="2">
+            <div>
+              <div>{{ id }}</div>
+              <p>{{ symbol }}</p>
+            </div>
+          </td>
+          <td class="right-aligned">${{ priceUsd }}</td>
+          <td class="right-aligned">{{ changePercent24Hr }}%</td>
         </tr>
         <tr>
           <td class="left-aligned" colspan="2">Bitcoin</td>
@@ -29,13 +32,49 @@
   </div>
 </template>
 
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
+
+// const assets = ref<
+//   Array<{ id: string; symbol: string; changePercent24Hr: string; priceUsd: string }>
+// >([])
+
+const id = ref('')
+const symbol = ref('')
+const priceUsd = ref('')
+const changePercent24Hr = ref('')
+
+const getData = async () => {
+  try {
+    const res = await fetch('https://api.coincap.io/v2/assets')
+    const data = await res.json()
+
+    // assets.value = data.data
+
+    // console.log(assets.value[0].id)
+    // console.log(assets.value[0].symbol)
+    // console.log(assets.value[0].changePercent24Hr)
+    // console.log(assets.value[0].priceUsd)
+
+    id.value = data.data[0].id
+    symbol.value = data.data[0].symbol
+    priceUsd.value = data.data[0].priceUsd
+    changePercent24Hr.value = data.data[0].changePercent24Hr
+  } catch {
+    throw new Error('something went wrong in getData')
+  }
+}
+
+onMounted(() => getData())
+</script>
+
 <style scoped>
 table {
   width: 100%;
   background-color: var(--color-background);
   margin-top: 1rem;
   border-radius: 8px;
-  border-collapse: collapse;
+  /* border-collapse: collapse; */
 }
 
 thead {
@@ -54,8 +93,7 @@ td {
 }
 
 tbody > tr {
-  /* border: solid 1px red; */
-  outline: thin solid;
+  outline: 1px solid;
 }
 
 .left-aligned {
@@ -64,5 +102,10 @@ tbody > tr {
 
 .right-aligned {
   text-align: right;
+}
+
+p {
+  font-size: 0.8em;
+  opacity: 0.6;
 }
 </style>
