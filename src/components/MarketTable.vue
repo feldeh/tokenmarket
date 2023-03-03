@@ -44,6 +44,10 @@ const symbol = ref('')
 const priceUsd = ref('')
 const changePercent24Hr = ref('')
 
+const trimString = (str: string): string => {
+  return parseFloat(str).toFixed(2).toString()
+}
+
 const getData = async () => {
   try {
     const res = await fetch('https://api.coincap.io/v2/assets')
@@ -58,8 +62,8 @@ const getData = async () => {
 
     id.value = data.data[0].id
     symbol.value = data.data[0].symbol
-    priceUsd.value = data.data[0].priceUsd
-    changePercent24Hr.value = data.data[0].changePercent24Hr
+    priceUsd.value = trimString(data.data[0].priceUsd)
+    changePercent24Hr.value = trimString(data.data[0].changePercent24Hr)
   } catch {
     throw new Error('something went wrong in getData')
   }
