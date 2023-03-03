@@ -45,7 +45,7 @@ const priceUsd = ref('')
 const changePercent24Hr = ref('')
 
 const trimString = (str: string): string => {
-  return parseFloat(str).toFixed(2).toString()
+  return parseFloat(str).toFixed(2)
 }
 
 const getData = async () => {
