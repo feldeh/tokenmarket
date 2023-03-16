@@ -45,7 +45,10 @@ const priceUsd = ref('')
 const changePercent24Hr = ref('')
 
 const trimString = (str: string): string => {
-  return parseFloat(str).toFixed(2)
+  return parseFloat(str).toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  })
 }
 
 const getData = async () => {
@@ -53,12 +56,7 @@ const getData = async () => {
     const res = await fetch('https://api.coincap.io/v2/assets')
     const data = await res.json()
 
-    // assets.value = data.data
-
-    // console.log(assets.value[0].id)
-    // console.log(assets.value[0].symbol)
-    // console.log(assets.value[0].changePercent24Hr)
-    // console.log(assets.value[0].priceUsd)
+    console.log(typeof data.data[0].priceUsd)
 
     id.value = data.data[0].id
     symbol.value = data.data[0].symbol
