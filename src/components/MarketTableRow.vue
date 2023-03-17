@@ -13,10 +13,7 @@
 
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue'
-
-// const assets = ref<
-//   Array<{ id: string; symbol: string; changePercent24Hr: string; priceUsd: string }>
-// >([])
+import type { Asset } from '../types/interfaces'
 
 const id = ref('')
 const symbol = ref('')
@@ -30,9 +27,9 @@ const trimString = (str: string): string => {
   })
 }
 
-const props = defineProps({
-  asset: Object
-})
+const props = defineProps<{
+  asset: Asset
+}>()
 
 watchEffect(() => {
   id.value = props.asset.id

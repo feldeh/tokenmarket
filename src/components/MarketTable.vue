@@ -22,19 +22,9 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import MarketTableRow from './MarketTableRow.vue'
+import type { Asset } from '../types/interfaces'
 
-// const assets = ref<
-//   Array<{ id: string; symbol: string; changePercent24Hr: string; priceUsd: string }>
-// >([])
-
-const assets = ref([])
-
-const trimString = (str: string): string => {
-  return parseFloat(str).toLocaleString('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  })
-}
+const assets = ref<Asset[]>([])
 
 const getData = async () => {
   try {
@@ -46,8 +36,6 @@ const getData = async () => {
     throw new Error('something went wrong in getData')
   }
 }
-
-console.log('assets', assets)
 
 onMounted(() => getData())
 </script>
