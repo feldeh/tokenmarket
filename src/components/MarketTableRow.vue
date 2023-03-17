@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, watchEffect } from 'vue'
 
 // const assets = ref<
 //   Array<{ id: string; symbol: string; changePercent24Hr: string; priceUsd: string }>
@@ -30,21 +30,16 @@ const trimString = (str: string): string => {
   })
 }
 
-const getData = async () => {
-  try {
-    const res = await fetch('https://api.coincap.io/v2/assets')
-    const data = await res.json()
+const props = defineProps({
+  asset: Object
+})
 
-    id.value = data.data[0].id
-    symbol.value = data.data[0].symbol
-    priceUsd.value = trimString(data.data[0].priceUsd)
-    changePercent24Hr.value = trimString(data.data[0].changePercent24Hr)
-  } catch {
-    throw new Error('something went wrong in getData')
-  }
-}
-
-onMounted(() => getData())
+watchEffect(() => {
+  id.value = props.asset.id
+  symbol.value = props.asset.symbol
+  priceUsd.value = trimString(props.asset.priceUsd)
+  changePercent24Hr.value = trimString(props.asset.changePercent24Hr)
+})
 </script>
 
 <style scoped>

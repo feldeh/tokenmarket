@@ -22,7 +22,8 @@
           <td class="right-aligned">${{ priceUsd }}</td>
           <td class="right-aligned">{{ changePercent24Hr }}%</td>
         </tr>
-        <MarketTableRow />
+        <!-- <MarketTableRow :assets="assets" /> -->
+        <MarketTableRow v-for="(asset, index) in assets" :key="index" :asset="asset" />
       </tbody>
     </table>
   </div>
@@ -41,6 +42,8 @@ const symbol = ref('')
 const priceUsd = ref('')
 const changePercent24Hr = ref('')
 
+const assets = ref([])
+
 const trimString = (str: string): string => {
   return parseFloat(str).toLocaleString('en-US', {
     minimumFractionDigits: 2,
@@ -53,6 +56,8 @@ const getData = async () => {
     const res = await fetch('https://api.coincap.io/v2/assets')
     const data = await res.json()
 
+    assets.value = data.data
+
     id.value = data.data[0].id
     symbol.value = data.data[0].symbol
     priceUsd.value = trimString(data.data[0].priceUsd)
@@ -61,6 +66,8 @@ const getData = async () => {
     throw new Error('something went wrong in getData')
   }
 }
+
+console.log('assets', assets)
 
 onMounted(() => getData())
 </script>
