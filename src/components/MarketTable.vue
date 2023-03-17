@@ -12,16 +12,6 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td class="left-aligned" colspan="2">
-            <div>
-              <div>{{ id }}</div>
-              <p>{{ symbol }}</p>
-            </div>
-          </td>
-          <td class="right-aligned">${{ priceUsd }}</td>
-          <td class="right-aligned">{{ changePercent24Hr }}%</td>
-        </tr>
         <!-- <MarketTableRow :assets="assets" /> -->
         <MarketTableRow v-for="(asset, index) in assets" :key="index" :asset="asset" />
       </tbody>
@@ -36,11 +26,6 @@ import MarketTableRow from './MarketTableRow.vue'
 // const assets = ref<
 //   Array<{ id: string; symbol: string; changePercent24Hr: string; priceUsd: string }>
 // >([])
-
-const id = ref('')
-const symbol = ref('')
-const priceUsd = ref('')
-const changePercent24Hr = ref('')
 
 const assets = ref([])
 
@@ -57,11 +42,6 @@ const getData = async () => {
     const data = await res.json()
 
     assets.value = data.data
-
-    id.value = data.data[0].id
-    symbol.value = data.data[0].symbol
-    priceUsd.value = trimString(data.data[0].priceUsd)
-    changePercent24Hr.value = trimString(data.data[0].changePercent24Hr)
   } catch {
     throw new Error('something went wrong in getData')
   }
