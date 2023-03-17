@@ -2,8 +2,8 @@
   <tr>
     <td class="left-aligned" colspan="2">
       <div>
-        <div>{{ id }}</div>
-        <p>{{ symbol }}</p>
+        <p class="id">{{ id }}</p>
+        <p class="symbol">{{ symbol }}</p>
       </div>
     </td>
     <td class="right-aligned">${{ priceUsd }}</td>
@@ -56,8 +56,12 @@ td {
   text-align: right;
 }
 
-p {
+.symbol {
   font-size: 0.8em;
   opacity: 0.6;
+}
+
+.id {
+  font-weight: 500;
 }
 </style>
