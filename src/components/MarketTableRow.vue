@@ -2,11 +2,13 @@
   <tr>
     <td class="left-aligned" colspan="2">
       <div>
-        <p class="id">{{ id }}</p>
+        <p class="id">{{ name }}</p>
         <p class="symbol">{{ symbol }}</p>
       </div>
     </td>
     <td class="right-aligned">${{ priceUsd }}</td>
+    <td class="right-aligned">${{ marketCapUsd }}</td>
+    <td class="right-aligned">${{ volumeUsd24Hr }}</td>
     <td class="right-aligned">{{ changePercent24Hr }}%</td>
   </tr>
 </template>
@@ -15,10 +17,15 @@
 import { ref, watchEffect } from 'vue'
 import type { Asset } from '../types/interfaces'
 
-const id = ref('')
 const symbol = ref('')
 const priceUsd = ref('')
 const changePercent24Hr = ref('')
+const rank = ref('')
+const name = ref('')
+const supply = ref('')
+const maxSupply = ref('')
+const marketCapUsd = ref('')
+const volumeUsd24Hr = ref('')
 
 const trimString = (str: string): string => {
   return parseFloat(str).toLocaleString('en-US', {
@@ -32,10 +39,12 @@ const props = defineProps<{
 }>()
 
 watchEffect(() => {
-  id.value = props.asset.id
+  name.value = props.asset.name
   symbol.value = props.asset.symbol
   priceUsd.value = trimString(props.asset.priceUsd)
+  marketCapUsd.value = trimString(props.asset.marketCapUsd)
   changePercent24Hr.value = trimString(props.asset.changePercent24Hr)
+  volumeUsd24Hr.value = trimString(props.asset.volumeUsd24Hr)
 })
 </script>
 

@@ -8,11 +8,12 @@
         <tr>
           <th class="left-aligned" colspan="2">Name</th>
           <th class="right-aligned">Price</th>
+          <th class="right-aligned">Market Cap</th>
+          <th class="right-aligned">Volume</th>
           <th class="right-aligned">Change</th>
         </tr>
       </thead>
       <tbody>
-        <!-- <MarketTableRow :assets="assets" /> -->
         <MarketTableRow v-for="(asset, index) in assets" :key="index" :asset="asset" />
       </tbody>
     </table>
