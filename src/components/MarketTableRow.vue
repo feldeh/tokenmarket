@@ -29,8 +29,6 @@ const changePercent24Hr = ref('')
 const rank = ref('')
 const id = ref('')
 const name = ref('')
-const supply = ref('')
-const maxSupply = ref('')
 const marketCapUsd = ref('')
 const volumeUsd24Hr = ref('')
 

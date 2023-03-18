@@ -46,9 +46,7 @@ onMounted(() => getData())
 table {
   width: 100%;
   background-color: var(--color-background);
-  margin-top: 1rem;
   border-radius: 8px;
-  /* border-collapse: collapse; */
 }
 
 thead {
