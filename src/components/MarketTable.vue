@@ -6,6 +6,7 @@
       <col width="100" />
       <thead>
         <tr>
+          <th class="left-aligned" colspan="1">Rank</th>
           <th class="left-aligned" colspan="2">Name</th>
           <th class="right-aligned">Price</th>
           <th class="right-aligned">Market Cap</th>

@@ -1,8 +1,10 @@
 <template>
   <tr>
+    <td class="left-aligned">{{ rank }}</td>
+
     <td class="left-aligned" colspan="2">
       <div>
-        <p class="id">{{ name }}</p>
+        <p class="name">{{ name }}</p>
         <p class="symbol">{{ symbol }}</p>
       </div>
     </td>
@@ -39,6 +41,7 @@ const props = defineProps<{
 }>()
 
 watchEffect(() => {
+  rank.value = props.asset.rank
   name.value = props.asset.name
   symbol.value = props.asset.symbol
   priceUsd.value = trimString(props.asset.priceUsd)
@@ -67,7 +70,7 @@ td {
   opacity: 0.6;
 }
 
-.id {
+.name {
   font-weight: 500;
 }
 </style>
