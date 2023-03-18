@@ -1,8 +1,8 @@
 <template>
   <div class="table">
     <table cellspacing="0" cellpadding="0">
-      <col width="100" />
-      <col width="100" />
+      <col width="10" />
+      <col width="200" />
       <col width="100" />
       <thead>
         <tr>

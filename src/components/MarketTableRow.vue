@@ -57,7 +57,6 @@ watchEffect(() => {
   volumeUsd24Hr.value = trimString(props.asset.volumeUsd24Hr)
 })
 
-// const iconUrl = computed(() => `https://cryptoicons.org/api/color/${lowerCaseSymbol.value}/200`)
 const iconUrl = computed(
   () => `https://assets.coincap.io/assets/icons/${lowerCaseSymbol.value}@2x.png`
 )
