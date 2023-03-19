@@ -6,11 +6,11 @@
     </div>
     <div class="global-metric">
       <div>Exchange Vol</div>
-      <div>$1.36T</div>
+      <div>${{ total_volume_24h }}</div>
     </div>
     <div class="global-metric">
       <div>BTC Dom</div>
-      <div>$1.36T</div>
+      <div>{{ btc_dominance }}%</div>
     </div>
   </div>
 </template>
@@ -21,6 +21,8 @@ import type { Global } from '../types/interfaces'
 
 const global = ref<Global | null>(null)
 const total_market_cap = ref('')
+const total_volume_24h = ref('')
+const btc_dominance = ref('')
 
 const getData = async () => {
   try {
@@ -36,6 +38,8 @@ const getData = async () => {
 watchEffect(() => {
   if (global.value) {
     total_market_cap.value = global.value.quote.USD.total_market_cap.toString()
+    total_volume_24h.value = global.value.quote.USD.total_volume_24h.toString()
+    btc_dominance.value = global.value.btc_dominance.toString()
   }
 })
 
