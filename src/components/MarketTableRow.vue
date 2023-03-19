@@ -39,6 +39,25 @@ const trimString = (str: string): string => {
   })
 }
 
+const formatBigNum = (str: string): string => {
+  const num = parseFloat(str)
+
+  const range = (num: number) => {
+    if (num < 1_000_000) return 0
+    if (num < 1_000_000_000) return 1
+    if (num < 1_000_000_000_000) return 2
+    return 3
+  }
+
+  const divisors = [1_000, 1_000_000, 1_000_000_000, 1_000_000_000_000]
+  const suffixes = ['k', 'm', 'b', 't']
+
+  const index = range(num)
+  const result = (num / divisors[index]).toFixed(2) + suffixes[index]
+
+  return result
+}
+
 const props = defineProps<{
   asset: Asset
 }>()
@@ -50,9 +69,9 @@ watchEffect(() => {
   symbol.value = props.asset.symbol
   lowerCaseSymbol.value = symbol.value.toLowerCase()
   priceUsd.value = trimString(props.asset.priceUsd)
-  marketCapUsd.value = trimString(props.asset.marketCapUsd)
+  marketCapUsd.value = formatBigNum(props.asset.marketCapUsd)
+  volumeUsd24Hr.value = formatBigNum(props.asset.volumeUsd24Hr)
   changePercent24Hr.value = trimString(props.asset.changePercent24Hr)
-  volumeUsd24Hr.value = trimString(props.asset.volumeUsd24Hr)
 })
 
 const iconUrl = computed(

@@ -25,10 +25,10 @@ const total_volume_24h = ref('')
 const btc_dominance = ref('')
 
 const formatBigNum = (num: number): string => {
-  if (num < 1000000000000) {
-    return (num / 1000000000).toFixed(2) + 'B'
+  if (num < 1_000_000_000_000) {
+    return (num / 1_000_000_000).toFixed(2) + 'B'
   } else {
-    return (num / 1000000000000).toFixed(2) + 'T'
+    return (num / 1_000_000_000_000).toFixed(2) + 'T'
   }
 }
 
@@ -47,7 +47,7 @@ watchEffect(() => {
   if (global.value) {
     total_market_cap.value = formatBigNum(global.value.quote.USD.total_market_cap)
     total_volume_24h.value = formatBigNum(global.value.quote.USD.total_volume_24h)
-    btc_dominance.value = global.value.btc_dominance.toString()
+    btc_dominance.value = global.value.btc_dominance.toFixed(2)
   }
 })
 
