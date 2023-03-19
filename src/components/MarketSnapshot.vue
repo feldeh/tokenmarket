@@ -24,6 +24,14 @@ const total_market_cap = ref('')
 const total_volume_24h = ref('')
 const btc_dominance = ref('')
 
+const formatBigNum = (num: number): string => {
+  if (num < 1000000000000) {
+    return (num / 1000000000).toFixed(2) + 'B'
+  } else {
+    return (num / 1000000000000).toFixed(2) + 'T'
+  }
+}
+
 const getData = async () => {
   try {
     const res = await fetch('https://api-proxy-server-production.up.railway.app/api/global-metrics')
@@ -37,8 +45,8 @@ const getData = async () => {
 
 watchEffect(() => {
   if (global.value) {
-    total_market_cap.value = global.value.quote.USD.total_market_cap.toString()
-    total_volume_24h.value = global.value.quote.USD.total_volume_24h.toString()
+    total_market_cap.value = formatBigNum(global.value.quote.USD.total_market_cap)
+    total_volume_24h.value = formatBigNum(global.value.quote.USD.total_volume_24h)
     btc_dominance.value = global.value.btc_dominance.toString()
   }
 })
