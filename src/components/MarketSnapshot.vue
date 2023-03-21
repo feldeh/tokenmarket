@@ -35,11 +35,15 @@ const formatBigNum = (num: number): string => {
 const getData = async () => {
   try {
     const res = await fetch('https://api-proxy-server-production.up.railway.app/api/global-metrics')
-    const data = await res.json()
 
-    global.value = data.data
-  } catch {
-    throw new Error('something went wrong in getData')
+    if (res.ok) {
+      const data = await res.json()
+      global.value = data.data
+    } else {
+      throw new Error('HTTP error, status = ' + res.status)
+    }
+  } catch (error) {
+    console.log(error)
   }
 }
 

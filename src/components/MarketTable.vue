@@ -31,11 +31,14 @@ const assets = ref<Asset[]>([])
 const getData = async () => {
   try {
     const res = await fetch('https://api.coincap.io/v2/assets')
-    const data = await res.json()
-
-    assets.value = data.data
-  } catch {
-    throw new Error('something went wrong in getData')
+    if (res.ok) {
+      const data = await res.json()
+      assets.value = data.data
+    } else {
+      throw new Error('HTTP error, status = ' + res.status)
+    }
+  } catch (error) {
+    console.log(error)
   }
 }
 
